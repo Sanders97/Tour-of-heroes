@@ -19,3 +19,7 @@ export class HeroesComponent implements OnInit {
   }
 
 }
+
+export class HeroesComponent implements OnInit {
+
+  heroes = HEROES;
