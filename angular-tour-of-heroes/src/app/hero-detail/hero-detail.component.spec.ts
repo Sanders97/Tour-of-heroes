@@ -23,3 +23,7 @@ describe('HeroDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+goBack(): void {
+  this.location.back();
+}
