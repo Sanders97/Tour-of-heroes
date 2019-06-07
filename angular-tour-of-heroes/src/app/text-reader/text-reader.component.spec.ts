@@ -19,7 +19,7 @@ describe('TextReaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should read text aloud to the viewer', () => {
     expect(component).toBeTruthy();
   });
 });
