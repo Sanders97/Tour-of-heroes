@@ -8,6 +8,7 @@ const readline = require('readline-sync');
 // Requires xmlbuilder to build the SSML body
 const xmlbuilder = require('xmlbuilder');
 
+
 // Gets an access token.
 function getAccessToken(subscriptionKey) {
     let options = {
@@ -59,3 +60,27 @@ function textToSpeech(accessToken, text) {
         });
     return request;
 }
+
+// Use async and await to get the token before attempting
+// to convert text to speech.
+async function main() {
+    // Reads subscription key from env variable.
+    // You can replace this with a string containing your subscription key. If
+    // you prefer not to read from an env variable.
+    // e.g. const subscriptionKey = "your_key_here";
+    const subscriptionKey = process.env.SPEECH_SERVICE_KEY;
+    if (!subscriptionKey) {
+        throw new Error('Environment variable for your subscription key is not set.')
+    };
+    // Prompts the user to input text.
+    const text = readline.question('What would you like to convert to speech? ');
+
+    try {
+        const accessToken = await getAccessToken(subscriptionKey);
+        await textToSpeech(accessToken, text);
+    } catch (err) {
+        console.log(`Something went wrong: ${err}`);
+    }
+}
+
+main()
